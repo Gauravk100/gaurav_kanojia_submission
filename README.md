@@ -35,7 +35,7 @@ Run the following commands to install the necessary dependencies:
 
 ```
 # Clone the repository
-git clone https://github.com/yourusername/chatbot-coding-help-extension.git
+git clone https://github.com/Gauravk100/gaurav_kanojia_submission.git
 
 # Navigate to the project directory
 cd chatbot-coding-help-extension
@@ -45,10 +45,6 @@ npm install
 # or
 yarn install
 ```
-
-
-
-
 ## Usage
 To run the project locally, use the following commands:
 ```
@@ -71,7 +67,10 @@ npm run preview
 yarn preview
 ```
 
-##Load the Extension
+
+
+
+## Load the extension 
 
 Build the project using the npm run build or yarn build command.
 
@@ -81,7 +80,7 @@ Enable "Developer mode."
 
 Click "Load unpacked" and select the dist folder from the project directory.
 
-##How to Use
+## How to Use
 
 Navigate to LeetCode or MAANG platforms.
 
@@ -89,15 +88,13 @@ Click on the floating widget to open the extension.
 
 Choose between GPT or Gemini as your AI model.
 
-Enter your API key.
-
 Enter your coding problem or debugging query.
 
 View and use the AI's suggestions or solutions.
 
 Toggle between dark and light themes from the settings menu.
 
-##Technical Details
+## Technical Details
 
 Tech Stack: TypeScript, React.js, Vite, Tailwind CSS
 
@@ -107,9 +104,6 @@ Themes: Full support for dark and light modes
 
 Floating Design: Can move the extension anywhere in screen as per user convenience 
 
-##License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
 
 
 

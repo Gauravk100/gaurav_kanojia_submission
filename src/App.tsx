@@ -87,23 +87,26 @@ export const Popup: React.FC = () => {
   }
 
   return (
-    <div className="relative p-4 w-[350px] bg-background">
+    <div className="relative p-4 w-[350px] bg-[#262626] border border-[#333333] ">
       <Show show={isLoaded}>
         <div className="">
           <div className="w-full  h-20 overflow-hidden ">
             <img
               className="mx-auto h-20 w-auto"
-              src={leetCode}
+              src={chrome.runtime.getURL('src/assets/chat-bot-final.svg')}
               width={150}
               height={150}
+              style={{
+                filter: 'invert(1)',
+              }}
             />
           </div>
           <div className="text-center">
             <h1 className=" font-bold text-3xl text-white">
-              LeetCode <span className="text-whisperOrange">Whisper</span>
+              Chat Bot
             </h1>
             <p className="text-sm text-muted-foreground">
-              Your Companion to Beat LeetCode!
+              Your Go-To Companion for Problem Solving!s
             </p>
           </div>
           <form
@@ -112,7 +115,7 @@ export const Popup: React.FC = () => {
           >
             <div className="space-y-2">
               <label htmlFor="text" className="text-xs text-muted-foreground">
-                select a model
+                Select a model
               </label>
               <Select
                 onValueChange={(v: ValidModel) => handleModel(v)}
@@ -144,7 +147,7 @@ export const Popup: React.FC = () => {
               <HideApiKey
                 value={apikey || ''}
                 onChange={(e) => setApikey(e.target.value)}
-                placeholder="Enter OpenAI API Key"
+                placeholder={!selectedModel ? 'Select a model and enter API Key' : selectedModel === 'gemini_1.5_pro' ?"Enter Gemini API Key" :"Enter OpenAI API Key"}
                 disabled={!model}
                 required
               />
@@ -206,10 +209,9 @@ export const MaangPopup: React.FC = () => {
     message: string
   } | null>(null)
 
-  // @ts-ignore
   
 
-  const [selectedModel, setSelectedModel] = useState<ValidModel>()
+  const [selectedModel, setSelectedModel] = useState<ValidModel | null>(null)
 
   const updatestorage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -260,74 +262,25 @@ export const MaangPopup: React.FC = () => {
       setApikey((await getKeyModel(await selectModel())).apiKey)
     }
   }
+  // @ts-ignore
   const [theme,setTheme] = useState<ThemeTypes>(Themes.LIGHT);
   
-  useEffect(() => {
-    console.log(location.origin);
-    
-    if(location.origin === ORIGINS.leetcode){
-      return;
-    }
-
-
-
-
-    const setInitialTheme = () => {
-      const initialTheme = document.documentElement.getAttribute('data-theme');
-      if (initialTheme === 'dark'){
-        setTheme(Themes.DARK);
-      }else{
-        setTheme(Themes.LIGHT);
-      }
-      
-    }
-
-
-    const observerCallback = (mutationsList:any) => {
-      for (const mutation of mutationsList) {
-        if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
-          const newTheme = document.documentElement.getAttribute('data-theme');
-          console.log(newTheme);
-          
-          if(newTheme === 'dark' ){
-            setTheme(Themes.DARK);
-          }else{
-            setTheme(Themes.LIGHT);
-          }
-          
-        }
-      }
-    };
-
-    // Create a MutationObserver instance
-    const observer = new MutationObserver(observerCallback);
-
-
-    setInitialTheme();
-    // Observe changes to the <html> element's attributes
-    observer.observe(document.documentElement, { attributes: true });
-
-    return () => {
-      // Cleanup: Disconnect the observer
-      observer.disconnect();
-    };
-
-  },[]);
+  
 
   
 
   
 
   return (
-    <div className={cn("relative p-4 w-[350px] rounded-md",
+    <div className={cn("relative p-4 w-[350px] ",
       theme === Themes.DARK ? 'bg-[#151d28] border-[1px] border-white ' : 'bg-white'
     )}>
-      <Show show={true}>
+      <Show show={isLoaded}>
         <div className="">
           <div className="w-full  h-20 overflow-hidden ">
             <img
               className="mx-auto h-20 w-auto"
-              src={leetCode}
+              src={chrome.runtime.getURL('src/assets/chat-bot-final.svg')}
               width={150}
               height={150}
             />
@@ -336,10 +289,10 @@ export const MaangPopup: React.FC = () => {
             <h1 className={cn(" font-bold text-3xl  ",
               theme === Themes.DARK ? 'text-white' : 'text-black'
             )}>
-              LeetCode <span className="text-whisperOrange">Whisper</span>
+              Chat Bot
             </h1>
             <p className="text-sm text-muted-foreground">
-              Your Companion to 
+              Your Go-To Companion for Problem Solving!
             </p>
           </div>
           <form
@@ -354,7 +307,7 @@ export const MaangPopup: React.FC = () => {
               </label>
               <Select
                 onValueChange={(v: ValidModel) => handleModel(v)}
-                value={selectedModel}
+                value={selectedModel!}
               >
                 <SelectTrigger className={cn("w-full ",
                   theme === Themes.DARK ? 'bg-[#151d28] dark border-[1px] border-gray-500 rounded-md' : 'bg-white text-black focus:border-[#aceaff] border-[#aceaff] '  
@@ -388,7 +341,7 @@ export const MaangPopup: React.FC = () => {
               <HideApiKey
                 value={apikey || ''}
                 onChange={(e) => setApikey(e.target.value)}
-                placeholder={selectedModel === 'gemini_1.5_pro' ?"Enter Gemini API Key" :"Enter OpenAI API Key"}
+                placeholder={!selectedModel ? 'Select a model and enter API Key' : selectedModel === 'gemini_1.5_pro' ?"Enter Gemini API Key" :"Enter OpenAI API Key"}
                 disabled={!model}
                 className={cn(
                   theme === Themes.DARK ? 'bg-[#151d28] dark border-[1px] border-gray-500 rounded-md' : 'bg-white text-black focus:border-[#aceaff] border-[#aceaff]'
@@ -397,8 +350,9 @@ export const MaangPopup: React.FC = () => {
               />
             </div>
             <Button style={{
+              // borderRadius:'0px',
               background:theme === Themes.LIGHT ? 'linear-gradient(90deg,#033042,#005c83)' : ''
-            }} disabled={isloading} type="submit" className={cn("w-full mt-2",
+            }} disabled={isloading} type="submit" className={cn("w-full mt-2 rounded-md",
               theme === Themes.LIGHT ? 'text-white' : 'text-black'
             )}>
               Save API Key
@@ -431,6 +385,33 @@ export const MaangPopup: React.FC = () => {
           
         </div>
       </Show>
+    </div>
+  )
+}
+
+
+
+export const Pop = () =>{
+  const [activeSite,setActiveSite] = useState<string | null>(null);
+  
+
+  useEffect(() => {
+    chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+      console.log(tabs[0].url);
+      
+      if(tabs[0].url?.includes('leetcode')){
+        setActiveSite(ORIGINS.leetcode);
+      }else{
+        setActiveSite(ORIGINS.maang);
+      }
+    });
+  },[activeSite])
+
+  return(
+    <div>
+      {
+        activeSite ? activeSite === ORIGINS.leetcode ? <Popup/> : <MaangPopup/> : ''
+      }
     </div>
   )
 }

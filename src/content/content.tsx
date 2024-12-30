@@ -17,6 +17,7 @@ import { Highlight, themes } from 'prism-react-renderer'
 import { Input } from '@/components/ui/input'
 import { SYSTEM_PROMPT } from '@/constants/prompt'
 import { extractCode, getMaangUserCode } from './util'
+import botIcon from '../assets/chat-bot-final.svg'
 
 import {
   Accordion,
@@ -349,7 +350,13 @@ const ChatBox: React.FC<ChatBoxProps> = ({
            className={cn(" rounded-full p-2",
             theme === Themes.DARK ? 'bg-white' : 'bg-black'
           )}>
-            <BotMessageSquare color={theme === Themes.DARK ? "#000" : "#FFF"} className="h-6 w-6" />
+            <img src={
+              chrome.runtime.getURL('src/assets/chat-bot-final.svg')
+            } style={{
+              
+              width:'23px',
+              height:'23px',
+            }} alt="" />
           </div>
           <div className={(
               theme === Themes.LIGHT ? 'text-black' : 'text-white'
@@ -875,7 +882,7 @@ const MaangChatBox: React.FC<ChatBoxProps> = ({
   
 
   
-  console.log(theme);
+  
   
 
   if (!visible) return <></>
@@ -913,7 +920,14 @@ const MaangChatBox: React.FC<ChatBoxProps> = ({
             }}
           >
             
-            <BotMessageSquare color={theme === Themes.DARK ? "#fff" : "#000"} className="h-6 w-6" />
+            
+            <img src={
+              chrome.runtime.getURL('src/assets/chat-bot-final.svg')
+            } style={{
+              filter:theme === Themes.DARK ? 'invert(1)' : '',
+              width:'23px',
+              height:'23px',
+            }} alt="" />
           </div>
           <div className={(
               theme === Themes.LIGHT ? 'text-black' : 'text-white'
@@ -1368,6 +1382,7 @@ const MaangContentPage: React.FC = () => {
           const newTheme = document.documentElement.getAttribute('data-theme');
           console.log(newTheme);
           
+          
           if(newTheme === 'dark' ){
             setTheme(Themes.DARK);
           }else{
@@ -1394,9 +1409,7 @@ const MaangContentPage: React.FC = () => {
   },[])
 
 
-  useEffect(()=>{
-    chrome.runtime.sendMessage({ action: 'maangThemeChange',data:theme })
-  },[theme])
+  
 
 
 
@@ -1584,14 +1597,19 @@ const MaangContentPage: React.FC = () => {
             :
             {
               backgroundColor: theme === Themes.LIGHT ?  '#daf6ff' : '#121212',
-              border:theme === Themes.LIGHT ?  '2px solid #7bdcff' : '2px solid #fff',
+              border:theme === Themes.LIGHT ?  '2px solid #7bdcff' : '2px solid #666666',
             }
           }
           onClick={() => setChatboxExpanded(!chatboxExpanded)}
         >
-          <BotMessageSquare style={{
-            color:theme === Themes.LIGHT ?  '#000' : '#fff',
-          }} />
+          
+          <img src={
+            chrome.runtime.getURL('src/assets/chat-bot-final.svg')
+          } style={{
+            filter:theme === Themes.DARK ? 'invert(1)' : '',
+            width:'23px',
+            height:'23px',
+          }} alt="" />
         </button>
       </div>
     </div>

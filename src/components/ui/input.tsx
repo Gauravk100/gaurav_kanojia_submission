@@ -204,10 +204,10 @@ const HideApiKey = React.forwardRef<
         <div className='flex'>
           {/* <div className="bg-background w-4 h-4" /> */}
           {showPassword ? (
-            <EyeOpenIcon className="h-4 w-4 " aria-hidden="true" />
+            <EyeOpenIcon className="h-4 w-4 text-gray-500" aria-hidden="true" />
           ) : (
             <EyeClosedIcon
-              className="h-4 w-4 "
+              className="h-4 w-4 text-gray-500"
               aria-hidden="true"
             />
           )}

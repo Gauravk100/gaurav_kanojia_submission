@@ -1288,7 +1288,7 @@ const MaangChatBox: React.FC<ChatBoxProps> = ({
 }
 
 
-const MaangContentPage: React.FC = () => {
+const LeetcodeContentPage: React.FC = () => {
   
   
   
@@ -1564,18 +1564,8 @@ const MaangContentPage: React.FC = () => {
         
         location.origin === ORIGINS.leetcode
         ?
-          null
-          // <ChatBox
-          //   visible={chatboxExpanded}
-          //   context={{ problemStatement }}
-          //   model={modal}
-          //   apikey={apiKey}
-          //   heandelModel={heandelModel}
-          //   selectedModel={selectedModel}
-          //   theme={theme}
-          // />
-        :
-          <MaangChatBox
+
+          <ChatBox
             visible={chatboxExpanded}
             context={{ problemStatement }}
             model={modal}
@@ -1583,8 +1573,19 @@ const MaangContentPage: React.FC = () => {
             heandelModel={heandelModel}
             selectedModel={selectedModel}
             theme={theme}
-            setTheme={setTheme}
           />
+        :
+            null
+        //   <MaangChatBox
+        //     visible={chatboxExpanded}
+        //     context={{ problemStatement }}
+        //     model={modal}
+        //     apikey={apiKey}
+        //     heandelModel={heandelModel}
+        //     selectedModel={selectedModel}
+        //     theme={theme}
+        //     setTheme={setTheme}
+        //   />
       )}
       <div className="flex justify-end">
         <button
@@ -1616,4 +1617,4 @@ const MaangContentPage: React.FC = () => {
   )
 }
 
-export default MaangContentPage
+export default LeetcodeContentPage

@@ -180,18 +180,7 @@ export const Popup: React.FC = () => {
           ) : (
             ''
           )}
-          <div className="mt-7 flex items-center justify-center">
-            <p className="text-sm">
-              Want more features?&nbsp;
-              <a
-                href="https://github.com/piyushgarg-dev/leetcode-whisper-chrome-extension/issues/new"
-                className="text-blue-500 hover:underline"
-                target="_blank"
-              >
-                Request a feature!
-              </a>
-            </p>
-          </div>
+         
         </div>
       </Show>
     </div>

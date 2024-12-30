@@ -17,7 +17,7 @@
 
   "content_scripts": [
     {
-      "js": ["src/content.tsx"],
+      "js": ["src/contentLeetcode.tsx"],
       "matches": ["https://leetcode.com/problems/*"]
     },
     {
